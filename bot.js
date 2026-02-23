@@ -63,8 +63,6 @@ client.on('messageCreate', async (message) => {
   }
 });
 
-client.ws.on("debug", console.log);
-client.ws.on("error", console.error);
 
 console.log("TOKEN LENGTH:", process.env.BOT_TOKEN?.length);
 client.login(process.env.BOT_TOKEN)
