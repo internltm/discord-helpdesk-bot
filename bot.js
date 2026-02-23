@@ -4,16 +4,16 @@ const express = require('express');
 
 const app = express();
 
-// ===== Express (จำเป็นสำหรับ Web Service) =====
+// ✅ เปิด port สำหรับ Render Web Service
 app.get('/', (req, res) => {
-  res.status(200).send('IT Helpdesk Bot is running');
+  res.send('Bot is running');
 });
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Web server ready');
 });
 
-// ===== Discord Client =====
+// ===== Discord Bot =====
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -31,7 +31,6 @@ client.on('messageCreate', async (message) => {
 
   const text = message.content.trim();
   const match = text.match(/^IT\d{2}-\d{3}$/i);
-
   if (!match) return;
 
   try {
@@ -42,36 +41,30 @@ client.on('messageCreate', async (message) => {
     });
 
     let raw = res.data;
-
     if (typeof raw === "string") {
       try { raw = JSON.parse(raw); } catch {}
     }
 
     const result = raw?.result?.toString().trim().toUpperCase();
 
-    if (result === "ACCEPTED") {
+    if (result === "ACCEPTED")
       await message.reply(`✅ ${text}\nสถานะ: กำลังดำเนินการ`);
-    }
-    else if (result === "CLOSED") {
+    else if (result === "CLOSED")
       await message.reply(`✅ ${text}\nสถานะ: เสร็จสิ้น`);
-    }
-    else if (result === "ALREADY_DONE") {
+    else if (result === "ALREADY_DONE")
       await message.reply(`⚠️ ${text}\nเคสนี้ปิดเรียบร้อยแล้ว`);
-    }
-    else if (result === "NOT_FOUND") {
+    else if (result === "NOT_FOUND")
       await message.reply(`❌ ไม่พบ Ticket นี้`);
-    }
-    else {
+    else
       await message.reply(`⚠️ ไม่สามารถอัปเดตสถานะได้`);
-    }
 
   } catch (err) {
-    console.error("AXIOS ERROR:", err);
+    console.error(err);
     await message.reply("❌ ติดต่อระบบไม่ได้");
   }
 });
 
-// ===== Login =====
+// ✅ Login
 client.login(process.env.BOT_TOKEN)
   .then(() => console.log("LOGIN SUCCESS"))
   .catch(err => console.error("LOGIN ERROR:", err));
