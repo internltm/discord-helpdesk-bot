@@ -83,5 +83,6 @@ console.log("FINAL RESULT:", result);
 
 });
 
-console.log("BOT_TOKEN =", process.env.BOT_TOKEN);
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN)
+  .then(() => console.log("LOGIN SUCCESS"))
+  .catch(err => console.error("LOGIN ERROR:", err));
