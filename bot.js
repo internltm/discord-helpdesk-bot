@@ -83,6 +83,10 @@ console.log("FINAL RESULT:", result);
 
 });
 
+// ===== LOGIN =====
+console.log("Starting Discord login...");
+console.log("BOT_TOKEN exists:", !!process.env.BOT_TOKEN);
+
 client.login(process.env.BOT_TOKEN)
   .then(() => console.log("LOGIN SUCCESS"))
   .catch(err => console.error("LOGIN ERROR:", err));
