@@ -20,6 +20,7 @@ const client = new Client({
   ]
 });
 
+
 client.on("clientReady", () => {
   console.log(`Bot logged in as ${client.user.tag}`);
 });
@@ -61,6 +62,9 @@ client.on('messageCreate', async (message) => {
     await message.reply("❌ ติดต่อระบบไม่ได้");
   }
 });
+
+client.ws.on("debug", console.log);
+client.ws.on("error", console.error);
 
 console.log("TOKEN LENGTH:", process.env.BOT_TOKEN?.length);
 client.login(process.env.BOT_TOKEN)
