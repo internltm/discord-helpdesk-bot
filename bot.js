@@ -35,6 +35,12 @@ const match = text.match(/^IT\d{2}-\d{3}$/i);
 
 if (match) {
 
+const res = await axios.post(process.env.GAS_WEBHOOK, {
+  source: "discord",
+  message: text,
+  admin: message.author.username
+});
+  
 let raw = res.data;
 console.log("RAW RESPONSE:", raw);
 
