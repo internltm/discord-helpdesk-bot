@@ -64,7 +64,10 @@ client.on('messageCreate', async (message) => {
   }
 });
 
-// ✅ Login
+client.ws.on("debug", (msg) => {
+  console.log("WS DEBUG:", msg);
+});
+
 client.login(process.env.BOT_TOKEN)
   .then(() => console.log("LOGIN SUCCESS"))
   .catch(err => console.error("LOGIN ERROR:", err));
