@@ -40,7 +40,7 @@ client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
 
   const text = message.content.trim();
-  const match = text.match(/^IT\d{2}-\d{3}$/i);
+  const match = text.match(/^IT\d{2}-\d{4}$/i);
   if (!match) return;
 
   try {
