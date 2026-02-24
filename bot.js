@@ -22,7 +22,6 @@ app.listen(process.env.PORT || 3000, () => {
   console.log('Web server ready');
 });
 
-/* 🔥 ต้องสร้าง client ก่อน */
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
